@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2013/12/23 12:50:49 by abrault           #+#    #+#             */
-/*   Updated: 2013/12/23 17:11:25 by abrault          ###   ########.fr       */
+/*   Updated: 2013/12/23 17:17:17 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ t_list	*getArray(int *i)
 		tok = NULL;
 	while (tok)
 	{
+		*i = *i + 1;
 		list = add_element(tok, list);
 		tok = ft_strtok(NULL, ' ');
 	}
@@ -60,8 +61,6 @@ int		main(void)
 		write(1, "$>", 3);
 		list = getArray(&i);
 		tab = getTab(i, list);
-		printf("|%s|", tab[0]);
-		printf("|%s|", tab[1]);
 	}
 	return (0);
 }

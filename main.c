@@ -15,17 +15,18 @@
 
 char	**getTab(int i, t_list *list)
 {
-	int			j;
+	int		j;
 	char		**tab;
 
 	j = 0;
-	tab = (char**)malloc(sizeof(*tab) * i);
+	tab = (char**)malloc(sizeof(*tab) * (i + 1));
 	while (i > j)
 	{
 		tab[j] = list->val;
 		list = list->next;
 		j++;
 	}
+	tab[j] = NULL;
 	return (tab);
 }
 
@@ -49,18 +50,51 @@ t_list	*getArray(int *i)
 	return (inverse_list(list));
 }
 
-int		main(void)
+void	ft_exe(char **tab, int i)
+{
+	pid_t		father;
+	char		*str;
+	int		status;
+
+	if (i)
+	{
+		str = (char*)malloc(sizeof(char) *( 5 + ft_strlen(tab[0])));
+		ft_strcpy(str, "/bin/");
+		ft_strcat(str, tab[0]);
+		father = fork();
+		if (father > 0)
+		{
+			wait(&status);
+			write(1, "$>", 2);
+		}
+		if (father == 0)
+			execve(str, tab, NULL);
+		free(str);
+	}
+}
+
+int	main(void)
 {
 	t_list		*list;
 	pid_t		proc;
 	char		**tab;
-	int			i;
+	int		i;
+	int		nb_elem;
 
+	tab = NULL;
+	write(1, "$>", 2);
 	while (1)
 	{
-		write(1, "$>", 3);
+		nb_elem = 0;
+		i = 0;
 		list = getArray(&i);
+		if (tab != NULL)
+			free(tab);
 		tab = getTab(i, list);
+		if (i)
+			ft_exe(tab, i);
+		else
+			write(1, "$>", 2);
 	}
 	return (0);
 }

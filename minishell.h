@@ -35,7 +35,7 @@ t_list	*add_element(char *str, t_list *list);
 t_list	*getArray();
 char	*extract_line(char **str);
 char	*re_malloc(char *buff, char *str);
-int		traitement(char **stock, char **line);
+int	traitement(char **stock, char **line);
 char	*ft_strtok(char *str, char sepa);
 
 #endif /* !MINISHELL_H */

@@ -10,21 +10,21 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = minishell
+NAME = ft_minishell
 
 FLAG = -Wall -Wextra -Werror
 
 SRC = main.c \
-	  ft_list.c
+      ft_list.c
 
 OBJ = main.o \
-	  ft_list.o
+      ft_list.o
 
 all: $(NAME)
 
 $(NAME):
 	gcc -c $(SRC)
-	gcc -o minishell $(OBJ) -L./libft/ -lft
+	gcc -o $(NAME) $(OBJ) -L./libft/ -lft
 
 clean:
 	rm -f $(OBJ)

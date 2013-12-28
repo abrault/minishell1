@@ -55,6 +55,7 @@ void	ft_exe(char **tab, int i)
 	pid_t		father;
 	char		*str;
 	int		status;
+	int		res;
 
 	if (i)
 	{
@@ -68,7 +69,11 @@ void	ft_exe(char **tab, int i)
 			write(1, "$>", 2);
 		}
 		if (father == 0)
-			execve(str, tab, NULL);
+		{
+			res = execve(str, tab, NULL);
+			if (res == -1)
+				write(1, "Command not found ...\n$>", 24);
+		}
 		free(str);
 	}
 }
@@ -92,7 +97,11 @@ int	main(void)
 			free(tab);
 		tab = getTab(i, list);
 		if (i)
+		{
+			if (ft_strcmp("exit", tab[0]) == 0)
+				return (0);
 			ft_exe(tab, i);
+		}
 		else
 			write(1, "$>", 2);
 	}

@@ -6,7 +6,7 @@
 /*   By: abrault <abrault@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2014/04/26 19:33:12 by abrault           #+#    #+#             */
-/*   Updated: 2014/04/27 00:01:49 by abrault          ###   ########.fr       */
+/*   Updated: 2014/04/27 14:46:02 by abrault          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ void		ft_exe(char *command, char **option, char **environ)
 	if (father == 0)
 		res = execve(command, option, environ);
 	free(command);
+	(void)res;
 }
 
 int			special_command(char *str)
@@ -34,7 +35,7 @@ int			special_command(char *str)
 	return (0);
 }
 
-char	*find_path(t_list *l_path, char *prog)
+char		*find_path(t_list *l_path, char *prog)
 {
 	char		*path;
 
@@ -52,7 +53,7 @@ char	*find_path(t_list *l_path, char *prog)
 	return (NULL);
 }
 
-int		try_command(t_list *l_path, char **environ, char **tab)
+int			try_command(t_list *l_path, char **environ, char **tab)
 {
 	char		*path;
 
